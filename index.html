@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+
+<head>
+  <meta charset='utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <title>New List</title>
+</head>
+
+<body>
+  <h1>My New List</h1>
+
+  <script>
+    const listTitle = document.querySelector('h1');
+
+    let inputBox = document.createElement('input');
+    inputBox.setAttribute('type', 'text');
+    listTitle.insertAdjacentElement('afterbegin', inputBox);
+    inputBox.setAttribute('display', 'none');
+
+    listTitle.addEventListener('click', () => {
+      // hide h1
+      listTitle.setAttribute('display', 'none');
+
+      // grab the current title and set it as the input text
+      let currentTitle = listTitle.textContent;
+      inputBox.setAttribute('value', currentTitle);
+
+      // display input box and bring focus
+      inputBox.setAttribute('display', 'block');
+      inputBox.focus();
+    });
+
+    inputBox.addEventListener('keydown', (e) => {
+      if (e.keydown === 'Enter') {
+        // grab the input text and set it as the new title
+        listTitle.textContent = inputBox.value.trim();
+
+        // hide the input box
+        inputBox.setAttribute('display', 'none');
+
+        // display the new title
+        listTitle.setAttribute('display', 'block');
+      }
+    });
+  </script>
+</body>
+
+</html>
