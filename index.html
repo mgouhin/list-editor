@@ -9,7 +9,6 @@
 
 <body>
   <h1>My New List</h1>
-  <input type='text'></input>
   <button>+ Item</button>
   <ul>
 
@@ -20,62 +19,63 @@
     const addItemBtn = document.querySelector('button');
     const list = document.querySelector('ul');
 
-    let inputBox = document.querySelector('input');
-    inputBox.style.display = 'none';
+    function editText(e) {
+      // store the current target text and hide the target text
+      let currentTextElement = e.target;
+      let currentText = currentTextElement.textContent;
 
-    listTitle.addEventListener('click', () => {
-      // hide h1
-      listTitle.style.display = 'none';
+      // create an input dialog set initial text to the current text
+      let inputDialog = document.createElement('input');
+      inputDialog.setAttribute('type', 'text');
+      inputDialog.setAttribute('value', currentText);
+      inputDialog.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          // grab the input text and set it as the new title
+          currentTextElement.textContent = inputDialog.value.trim();
 
-      // grab the current title and set it as the input text
-      let currentTitle = listTitle.textContent;
-      inputBox.setAttribute('value', currentTitle);
+          // remove the input box
+          inputDialog.remove();
 
-      // display input box and bring focus
-      inputBox.style.display = 'block';
-      inputBox.focus();
-    });
-
-    inputBox.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
+          // display the new title
+          currentTextElement.style.display = 'block';
+        }
+      });
+      inputDialog.addEventListener('blur', (e) => {
         // grab the input text and set it as the new title
-        listTitle.textContent = inputBox.value.trim();
+        currentTextElement.textContent = inputDialog.value.trim();
 
-        // hide the input box
-        inputBox.style.display = 'none';
+        // remove the input box
+        inputDialog.remove();
 
         // display the new title
-        listTitle.style.display = 'block';
-      }
-    });
+        currentTextElement.style.display = 'block';
+      });
+
+      currentTextElement.insertAdjacentElement('afterend', inputDialog);
+      currentTextElement.style.display = 'none';
+
+      inputDialog.focus();
+      inputDialog.select();
+    }
+
+    listTitle.addEventListener('click', editText);
 
     addItemBtn.addEventListener('click', () => {
       let newItemContainer = document.createElement('li');
-      let itemInput = document.createElement('input');
       let itemSpan = document.createElement('span');
       let itemDeleteBtn = document.createElement('button');
 
-      itemInput.setAttribute('type', 'text');
-      itemInput.style.display = 'none';
-      itemInput.addEventListener('keydown', () => {
-        alert('key down event in item input text box');
-      });
-
       itemSpan.textContent = 'new item';
-      itemSpan.addEventListener('click', () => {
-        alert('fill out item span click event');
-      });
+      itemSpan.addEventListener('click', editText);
 
       itemDeleteBtn.textContent = ' X ';
-      itemDeleteBtn.addEventListener('click', () => {
-        alert('fill out item delete button');
+      itemDeleteBtn.addEventListener('click', (e) => {
+        e.target.parentNode.remove();
       });
 
-      newItemContainer.appendChild(itemInput);
       newItemContainer.appendChild(itemSpan);
       newItemContainer.appendChild(itemDeleteBtn);
       list.appendChild(newItemContainer);
-
     });
   </script>
 </body>
