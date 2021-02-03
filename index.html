@@ -9,39 +9,73 @@
 
 <body>
   <h1>My New List</h1>
+  <input type='text'></input>
+  <button>+ Item</button>
+  <ul>
+
+  </ul>
 
   <script>
     const listTitle = document.querySelector('h1');
+    const addItemBtn = document.querySelector('button');
+    const list = document.querySelector('ul');
 
-    let inputBox = document.createElement('input');
-    inputBox.setAttribute('type', 'text');
-    listTitle.insertAdjacentElement('afterbegin', inputBox);
-    inputBox.setAttribute('display', 'none');
+    let inputBox = document.querySelector('input');
+    inputBox.style.display = 'none';
 
     listTitle.addEventListener('click', () => {
       // hide h1
-      listTitle.setAttribute('display', 'none');
+      listTitle.style.display = 'none';
 
       // grab the current title and set it as the input text
       let currentTitle = listTitle.textContent;
       inputBox.setAttribute('value', currentTitle);
 
       // display input box and bring focus
-      inputBox.setAttribute('display', 'block');
+      inputBox.style.display = 'block';
       inputBox.focus();
     });
 
     inputBox.addEventListener('keydown', (e) => {
-      if (e.keydown === 'Enter') {
+      if (e.key === 'Enter') {
         // grab the input text and set it as the new title
         listTitle.textContent = inputBox.value.trim();
 
         // hide the input box
-        inputBox.setAttribute('display', 'none');
+        inputBox.style.display = 'none';
 
         // display the new title
-        listTitle.setAttribute('display', 'block');
+        listTitle.style.display = 'block';
       }
+    });
+
+    addItemBtn.addEventListener('click', () => {
+      let newItemContainer = document.createElement('li');
+      let itemInput = document.createElement('input');
+      let itemSpan = document.createElement('span');
+      let itemDeleteBtn = document.createElement('button');
+
+      itemInput.setAttribute('type', 'text');
+      itemInput.style.display = 'none';
+      itemInput.addEventListener('keydown', () => {
+        alert('key down event in item input text box');
+      });
+
+      itemSpan.textContent = 'new item';
+      itemSpan.addEventListener('click', () => {
+        alert('fill out item span click event');
+      });
+
+      itemDeleteBtn.textContent = ' X ';
+      itemDeleteBtn.addEventListener('click', () => {
+        alert('fill out item delete button');
+      });
+
+      newItemContainer.appendChild(itemInput);
+      newItemContainer.appendChild(itemSpan);
+      newItemContainer.appendChild(itemDeleteBtn);
+      list.appendChild(newItemContainer);
+
     });
   </script>
 </body>
