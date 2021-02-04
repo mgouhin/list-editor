@@ -3,7 +3,6 @@ const listTitle = document.querySelector('h1');
 const addItemBtn = document.querySelector('.add-item-btn');
 const list = document.querySelector('ul');
 
-// update title to list name
 // start new item with text box and focus
 // update styles for buttons and input texts
 
@@ -17,7 +16,7 @@ function editText(e) {
   inputDialog.setAttribute('type', 'text');
   inputDialog.setAttribute('value', currentText);
   inputDialog.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
+    if ((e.key === 'Enter') && (inputDialog.value.trim().length >= 1)) {
       // grab the input text and set it as the new title
       currentTextElement.textContent = inputDialog.value.trim();
 
@@ -34,14 +33,16 @@ function editText(e) {
     }
   });
   inputDialog.addEventListener('blur', (e) => {
-    // grab the input text and set it as the new title
-    currentTextElement.textContent = inputDialog.value.trim();
+    if (inputDialog.value.trim().length >= 1) {
+      // grab the input text and set it as the new text
+      currentTextElement.textContent = inputDialog.value.trim();
 
-    // remove the input box
-    inputDialog.remove();
+      // remove the input box
+      inputDialog.remove();
 
-    // display the new title
-    currentTextElement.style.display = 'block';
+      // display the new text
+      currentTextElement.style.display = 'block';
+    }
   });
 
   currentTextElement.insertAdjacentElement('afterend', inputDialog);
@@ -54,6 +55,7 @@ function editText(e) {
 listTitle.addEventListener('click', editText);
 
 addItemBtn.addEventListener('click', () => {
+  // creating a li with span/text and a delete button
   let newItemContainer = document.createElement('li');
   let itemSpan = document.createElement('span');
   let itemDeleteBtn = document.createElement('button');
@@ -66,8 +68,14 @@ addItemBtn.addEventListener('click', () => {
     e.target.parentNode.remove();
   });
 
+  // adds the new list item and moves the '+ item' button to the end of the list
   newItemContainer.appendChild(itemSpan);
   newItemContainer.appendChild(itemDeleteBtn);
   list.appendChild(newItemContainer);
   newItemContainer.insertAdjacentElement('afterend', addItemBtn.parentNode);
+
+  // creates a click event on the new list item, therby prompting user
+  // for new text
+  const selectText = new MouseEvent('click');
+  newItemContainer.dispatchEvent(selectText);
 });
