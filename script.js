@@ -1,7 +1,7 @@
 /* TO DO
    - start new items with text box and focus
    - add color picker to title
-   - update styles for button text boxes
+   - update styles for text boxes
 */
 
 const pageTitle = document.querySelector('title');
@@ -63,7 +63,7 @@ function editText(e) {
 listTitle.addEventListener('click', editText);
 
 addItemBtn.addEventListener('click', () => {
-  // creating a li with span/text and a delete button
+  // creating a li element with span/text and a delete button
   let newItemContainer = document.createElement('li');
   let itemSpan = document.createElement('span');
   let itemDeleteBtn = document.createElement('button');
@@ -90,6 +90,5 @@ addItemBtn.addEventListener('click', () => {
     bubbles: true,
     cancelable: true
   });
-  setTimeout()
-  newItemContainer.dispatchEvent(selectText);
+  itemSpan.dispatchEvent(selectText);
 });
