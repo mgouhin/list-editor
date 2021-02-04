@@ -1,9 +1,11 @@
+const pageTitle = document.querySelector('title');
 const listTitle = document.querySelector('h1');
 const addItemBtn = document.querySelector('.add-item-btn');
 const list = document.querySelector('ul');
 
-alert('need to update button & input styles');
-//alert('update so add item button is always at the list bottom');
+// update title to list name
+// start new item with text box and focus
+// update styles for buttons and input texts
 
 function editText(e) {
   // store the current target text and hide the target text
@@ -18,6 +20,11 @@ function editText(e) {
     if (e.key === 'Enter') {
       // grab the input text and set it as the new title
       currentTextElement.textContent = inputDialog.value.trim();
+
+      // if the list title changes, change the page title as well
+      if (currentTextElement.nodeName === 'H1') {
+        pageTitle.textContent = inputDialog.value.trim();
+      }
 
       // remove the input box
       inputDialog.remove();
