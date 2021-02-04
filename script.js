@@ -1,6 +1,9 @@
 const listTitle = document.querySelector('h1');
-const addItemBtn = document.querySelector('button');
+const addItemBtn = document.querySelector('.add-item-btn');
 const list = document.querySelector('ul');
+
+alert('need to update button & input styles');
+//alert('update so add item button is always at the list bottom');
 
 function editText(e) {
   // store the current target text and hide the target text
@@ -59,4 +62,5 @@ addItemBtn.addEventListener('click', () => {
   newItemContainer.appendChild(itemSpan);
   newItemContainer.appendChild(itemDeleteBtn);
   list.appendChild(newItemContainer);
+  newItemContainer.insertAdjacentElement('afterend', addItemBtn.parentNode);
 });
