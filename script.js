@@ -1,10 +1,13 @@
+/* TO DO
+   - start new items with text box and focus
+   - add color picker to title
+   - update styles for button text boxes
+*/
+
 const pageTitle = document.querySelector('title');
 const listTitle = document.querySelector('h1');
 const addItemBtn = document.querySelector('.add-item-btn');
 const list = document.querySelector('ul');
-
-// start new item with text box and focus
-// update styles for buttons and input texts
 
 function editText(e) {
   // store the current target text and hide the target text
@@ -37,6 +40,11 @@ function editText(e) {
       // grab the input text and set it as the new text
       currentTextElement.textContent = inputDialog.value.trim();
 
+      // if the list title changes, change the page title as well
+      if (currentTextElement.nodeName === 'H1') {
+        pageTitle.textContent = inputDialog.value.trim();
+      }
+
       // remove the input box
       inputDialog.remove();
 
@@ -64,6 +72,7 @@ addItemBtn.addEventListener('click', () => {
   itemSpan.addEventListener('click', editText);
 
   itemDeleteBtn.textContent = ' X ';
+  itemDeleteBtn.setAttribute('class', 'delete-btn');
   itemDeleteBtn.addEventListener('click', (e) => {
     e.target.parentNode.remove();
   });
@@ -76,6 +85,11 @@ addItemBtn.addEventListener('click', () => {
 
   // creates a click event on the new list item, therby prompting user
   // for new text
-  const selectText = new MouseEvent('click');
+  const selectText = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  });
+  setTimeout()
   newItemContainer.dispatchEvent(selectText);
 });

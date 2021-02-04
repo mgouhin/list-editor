@@ -27,6 +27,28 @@ body {
   margin: 3vh auto;
 }
 
+button {
+  transition-duration: 0.2s;
+}
+
+.add-item-btn {
+  color: #efefef;
+  background-color: #54b454;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 2px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.add-item-btn:hover {
+  box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.4);
+}
+
+button:active {
+  opacity: 0.4;
+}
+
 ul {
   width: inherit;
   margin: 0;
@@ -61,4 +83,21 @@ li > span {
 
 li > button:not(.add-item-btn) {
   margin-right: 12px;
+}
+
+.delete-btn {
+  color: #550e0e;
+  background-color: #d33c22;
+  padding: 2px 4px;
+  border: none;
+  border-radius: 1px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.delete-btn:hover {
+  background-color: #ffffff;
+  border: 2px solid #d33c22;
+  border-radius: 2px;
 }
