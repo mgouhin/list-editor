@@ -1,5 +1,4 @@
 /* TO DO
-   - start new items with text box and focus
    - add color picker to title
    - update styles for text boxes
 */
